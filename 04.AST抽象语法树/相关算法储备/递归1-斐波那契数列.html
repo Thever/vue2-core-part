@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归1-斐波那契数列</title>
+</head>
+
+<body>
+    <b>斐波那契数列</b>
+    <p>相关练习题：用递归的方法输出斐波那契数列前 10 项</p>
+    <script>
+        //  嵌套递归
+        // function fn(n) {
+        //     console.count(n)
+        //     return n === 0 || n === 1 ? 1 : fn(n - 1) + fn(n - 2)
+        // }
+
+        // for (let i = 0; i < 10; i++) {
+        //     console.log(fn(i))
+        // }
+
+        /*
+            像上面这种解法，会有大量的重复执行，比如 fn(9) 的时候，会去执行 fn(8) 和 fn(7)，而执行 fn(8) 就会再执行一遍 fn(7)。为了避免这种重复的计算，我们可以用一个对象来缓存（cache）已经执行过的函数计算。如下：
+        */
+
+        // 设置一个缓存对象，用于存储 fn(n) 的值
+        let cache = {}
+        function fn(n) {
+            console.count(n)
+            // 如果 cache 有 n 属性
+            if (cache.hasOwnProperty(n)) {
+                return cache[n]
+            } else { // cache 没有 n 属性，说明是第一次计算
+                const v = n === 0 || n === 1 ? 1 : fn(n - 1) + fn(n - 2)
+                cache[n] = v
+                return v
+            }
+        }
+        for (let i = 0; i < 10; i++) {
+            console.log(fn(i))
+        }
+
+    </script>
+</body>
+
+</html>

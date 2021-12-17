@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据变为视图-数组join法</title>
+</head>
+<body>
+    <ul id="list">
+    </ul>
+    <script>
+        //  原理
+        var str = [
+            'A',
+            'B',
+            'C',
+            'D'
+        ].join('')
+        console.log(str)
+        //  str === 'ABCD',解决没有ES6反斜杠下字符串不能换行的问题
+
+        var str2 = [
+            '<li>',
+            '    <div class="hd"></div>',
+            '    <div class="bd">',
+            '       <p>姓名：</p>',
+            '       <p>年龄：</p>',
+            '       <p>性别：</p>',
+            '    </div>',
+            '</li>'
+        ].join('')
+        console.log(str2)
+        
+        //  数据源
+        var arr = [
+            {name:'小明',age:12,sex:'男'}, 
+            {name:'小红',age:11,sex:'女'}, 
+            {name:'小强',age:13,sex:'男'},
+        ]
+
+        //  获取要添加的对象
+        let list = document.getElementById('list')
+
+        //  遍历数组，创建内容
+        for(let i = 0; i < arr.length; i++){
+            //  以字符串的视角，循环添加片段即可
+            list.innerHTML += [
+                '<li>',
+                '    <div class="hd">'+arr[i].name+'的基本信息'+'</div>',
+                '    <div class="bd">',
+                '       <p>姓名：'+arr[i].name+'</p>',
+                '       <p>年龄：'+arr[i].age+'</p>',
+                '       <p>性别：'+arr[i].sex+'</p>',
+                '    </div>',
+                '</li>'
+            ].join('')
+
+        }
+    </script>
+</body>
+</html>

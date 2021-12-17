@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo_TemplateEngine</title>
+</head>
+<body>
+    <h1>打开命令行工具查看输出内容</h1>
+    <div id="container"></div>
+    <!-- 引用虚拟文件 -->
+    <script src="../xuni/bundle.js"></script>
+    <!-- 调用方法 -->
+    <script>
+
+        let templateStr = `
+            <ul>
+                {{#arr}}
+                    <li>
+                    <div>{{name}}的基本信息</div>
+                    <div>
+                        <p>{{name}}</p>
+                        <p>{{age}}</p>
+                        <div>
+                        <p>爱好：</p>
+                        <ol>
+                            {{#hobbies}}
+                            <li>{{.}}</li>
+                            {{/hobbies}}
+                        </ol>
+                        </div>
+                    </div>
+                    </li>
+                {{/arr}}
+            </ul>
+        `
+
+        let data = {
+            arr:[
+                {name:'小明',age:12,hobbies:['游泳','羽毛球']},
+                {name:'小红',age:11,hobbies:['编程','写作文','看报纸']},
+                {name:'小强',age:13,hobbies:['打台球']}
+            ]
+        }
+
+        //  简单数据解析
+        // let templateStr = `我爱{{somebody}}, {{somebody}}也爱我`
+        // let data = {
+        //     somebody:`某人`
+        // }
+
+        //  调用render 
+        let domStr = demoTemplateEngine.render(templateStr, data)
+        //  渲染上树
+        let container = document.getElementById('container')
+        container.innerHTML = domStr
+    </script>
+</body>
+</html>

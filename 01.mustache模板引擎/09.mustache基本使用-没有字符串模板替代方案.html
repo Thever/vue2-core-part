@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mustache基本使用--循环对象数组</title>
+</head>
+<body>
+    <ul id="list">
+    </ul>
+    <script src="js/mustache.js"></script>
+    <!-- script 只要 type 不为 text/script 就不会解析运行，也不会报错,一般写成 type = text/template -->
+    <script type="text/template" id="mytemplate">
+        <ul>
+            {{#arr}}
+                <li>
+                    <div class="hd">{{name}}的基本信息</div>
+                    <div class="bd">
+                        <p>姓名：{{name}}</p>
+                        <p>年龄：{{age}}</p>
+                        <p>性别：{{sex}}</p>
+                    </div>
+                </li>
+            {{/arr}}
+        </ul>
+    </script>
+    <script>
+        //  模板字符串，使用data.arr属性
+        // const templateStr = `
+        //     <ul>
+        //         {{#arr}}
+        //             <li>
+        //                 <div class="hd">{{name}}的基本信息</div>
+        //                 <div class="bd">
+        //                     <p>姓名：{{name}}</p>
+        //                     <p>年龄：{{age}}</p>
+        //                     <p>性别：{{sex}}</p>
+        //                 </div>
+        //             </li>
+        //         {{/arr}}
+        //     </ul>
+        // `
+
+        //  读取定义的模板内容
+        let templateStr = document.getElementById('mytemplate').innerHTML
+
+        //  数据源，结合上面使用属性
+        const data = {
+            arr:[
+                {name:'小明',age:12,sex:'男'}, 
+                {name:'小红',age:11,sex:'女'}, 
+                {name:'小强',age:13,sex:'男'},
+            ]
+        }
+
+        //  循环生成内容字符串
+        const domStr = Mustache.render(templateStr, data)
+
+        //  获取要添加的对象
+        let list = document.getElementById('list')
+
+        //  添加内容
+        list.innerHTML = domStr
+    </script>
+</body>
+</html>

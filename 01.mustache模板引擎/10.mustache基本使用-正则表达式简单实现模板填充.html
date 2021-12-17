@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式简单实现模板填充</title>
+</head>
+<body>
+    <div id="block"></div>
+    <script>
+        let templateStr = '<h1>我买了一个{{thing}},好{{mood}}</h1>'
+        let data = {
+            thing:'小米手机',
+            mood:'好用'
+        }
+        
+        //  replace只替换首个
+        // console.log('我1，我2'.replace('我','你'))
+
+        //  正则全局替换
+        // console.log('我1，我2'.replace(/我/g,'你'))
+
+        //  用函数返回替换内容
+        // console.log('我1，我2'.replace(/我/g,function(a,b,c,d){
+        //     // 被替换的内容
+        //     console.log(a)
+        //     // 被替换内容的序号
+        //     console.log(b)
+        //     // 字符串内容
+        //     console.log(c)
+        //    // 整个字符串
+        //    console.log(d) 
+        //     return '他'
+        // }))
+
+        // 使用映射实现简单的内容替换
+        // console.log(templateStr.replace(/\{\{(\w+)\}\}/g,function(findStr,$1,words,all){
+        //     console.log(findStr,$1,words,all)
+        //     return data[$1]
+        // }))
+
+        //  封装成函数
+        //  最简单的模板引擎的实现机理，利用的是正则表达式中的replace()方法
+        //  replace()的第二个参数可以是一个函数，这个函数提供捕获东西的参数，就是$1
+        //  结合data对象，即可进行智能的替换
+        function render(templateStr,data){
+            return templateStr.replace(/\{\{(\w+)\}\}/g,function(findStr,$1){
+                return data[$1]
+            })
+        }
+
+        //  使用函数
+        let result = render(templateStr,data)
+        console.log(result)
+
+        //  生成内容
+        document.getElementById('block').innerHTML = result
+    </script>
+</body>
+</html>

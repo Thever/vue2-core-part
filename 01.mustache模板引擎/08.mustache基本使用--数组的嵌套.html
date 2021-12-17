@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mustache基本使用--数组的嵌套</title>
+</head>
+<body>
+    <ul id="block">
+    </ul>
+    <script src="js/mustache.js"></script>
+    <script>
+        //  模板字符串，使用data.arr属性
+        const templateStr = `
+            <ul>
+                {{#arr}}
+                    <li>
+                        {{name}}的爱好是：
+                        <ol>
+                            {{#hobbies}}
+                                <li>{{.}}</li>
+                            {{/hobbies}}
+                        </ol>
+                        年龄是：{{age}}
+                    </li>
+                {{/arr}}    
+            </ul>
+        `
+
+        //  数据源，结合上面使用属性
+        const data = {
+            arr:[
+                {name:'小明',age:12,hobbies:['游泳','羽毛球']},
+                {name:'小红',age:11,hobbies:['编程','写作文','看报纸']},
+                {name:'小强',age:13,hobbies:['打台球']}
+            ]
+        }
+
+        //  循环生成内容字符串
+        const domStr = Mustache.render(templateStr, data)
+
+        //  获取要添加的对象
+        let list = document.getElementById('block')
+
+        //  添加内容
+        list.innerHTML = domStr
+    </script>
+</body>
+</html>

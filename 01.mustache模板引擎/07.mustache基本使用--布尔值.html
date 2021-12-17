@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mustache基本使用--布尔值</title>
+</head>
+<body>
+    <ul id="block">
+    </ul>
+    <script src="js/mustache.js"></script>
+    <script>
+        //  模板字符串，使用data.arr属性
+        const templateStr = `
+            {{#m}}
+            <p>你好</p>
+            {{/m}}
+        `
+
+        //  数据源，结合上面使用属性
+        const data = {
+            //  true显示内容，false不显示内容
+            m:false
+        }
+
+        //  循环生成内容字符串
+        const domStr = Mustache.render(templateStr, data)
+
+        //  获取要添加的对象
+        let list = document.getElementById('block')
+
+        //  添加内容
+        list.innerHTML = domStr
+    </script>
+</body>
+</html>

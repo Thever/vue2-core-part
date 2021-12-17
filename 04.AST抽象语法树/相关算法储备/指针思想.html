@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指针思想</title>
+</head>
+
+<body>
+    <b>指针思想</b>
+    <p>指针就是下标位置</p>
+    <p>相关练习题：寻找字符串中连续重复次数最多的字符</p>
+    <p>使用命令行查看内容</p>
+    <script>
+        // 寻找字符串中连续重复次数最多的字符
+        const str = 'aaaaaaaabbbbccccccccccccdddddddd'
+        // start 和 end: 指针
+        let start = 0, end = 1, maxChar = str[0], maxCharLength = 0
+        // 当 start 指针在 str 长度范围内时进行循环
+        while (start < str.length) {
+            // 如果两个指针指向的字符不一样了，说明不是连续重复的字符了
+            if (str[start] !== str[end]) {
+                // 如果指针之差大于之前存储的最大的连续数
+                if (end - start > maxCharLength) {
+                    maxCharLength = end - start
+                    maxChar = str[start]
+                }
+                // 让 start 指针直接追上 end 指针
+                start = end
+            }
+            // 每次循环 end 指针都向后移动一位
+            end++
+        }
+        console.log(maxChar, maxCharLength) // c 12
+    </script>
+</body>
+
+</html>
